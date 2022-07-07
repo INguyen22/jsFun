@@ -18,20 +18,20 @@ const { dinosaurs, humans, movies } = require('./datasets/dinosaurs');
 
 // DATASET: kitties from ./datasets/kitties
 const kittyPrompts = {
-  orangePetNames(kittyData) {
+  orangePetNames(babyData) {
     // Return an array of just the names of kitties who are orange e.g.
         // ['Tiger', 'Snickers']
 
         /* CODE GOES HERE */
-        const orangeKitties = kittyData
-        .filter((kitten) => {
-          return kitten.color === 'orange'
+        const orangeBabies = babyData
+        .filter((baby) => {
+          return baby.color === 'orange'
         })
-        .map(cat => {
-          return cat.name
+        .map(baby => {
+          return baby.name
         })
         
-        return orangeKitties
+        return orangeBabies
         //find only orange cats (filter?)
         //will return an array of cat objects
         //want to return an array of two name (map)
@@ -39,16 +39,24 @@ const kittyPrompts = {
     // Write your annotation here as a comment
   },
 
-  sortByAge() {
+  sortByAge(babyData) {
     // Sort the kitties by their age
 
     /* CODE GOES HERE */
+      const babyAgesDescending = babyData
+      .sort((a,b) => {
+        return b.age - a.age
+      })
 
+      return babyAgesDescending
     // Annotation:
     // Write your annotation here as a comment
+    // a is the first element for comparison
+    // b is the second element for comparison
+    //sort organizes arrays in alphabetical or numerical order
   },
 
-  growUp() {
+  growUp(babyData) {
     // Return an array of kitties who have all grown up by 2 years e.g.
     // [{
     //   name: 'Felicia',
@@ -63,6 +71,12 @@ const kittyPrompts = {
     // ...etc]
 
     /* CODE GOES HERE */
+    const grownAges = babyData
+    .map(baby => baby['age'] = baby.age + 2)
+
+    return babyData
+    //re-assigning kitty age key
+    //return changed kitty array
   }
 };
 
@@ -72,6 +86,7 @@ const kittyPrompts = {
 // they can perform the same utility
 // for the kitties or puppers datasets, depending on what arguments you send through.
 
+//changed kitty to baby cause kitties and puppies are baby animals
 
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
@@ -86,7 +101,7 @@ const kittyPrompts = {
 
 // DATASET: clubs from ./datasets/clubs
 const clubPrompts = {
-  membersBelongingToClubs() {
+  membersBelongingToClubs(clubData) {
     // Your function should access the clubs data through a parameter (it is being passed as an argument in the test file)
     // Create an object whose keys are the names of people, and whose values are
     // arrays that include the names of the clubs that person is a part of. e.g.
@@ -97,9 +112,13 @@ const clubPrompts = {
     // }
 
     /* CODE GOES HERE */
-
+    
     // Annotation:
     // Write your annotation here as a comment
+    //want a new object from array of objects (reduce()?)
+    //want an object with names as keys (...obj[name])
+    // each key has a value thats an array of clubs
+    //(...obj[name]: [clubs])
   }
 };
 
