@@ -210,7 +210,15 @@ const cakePrompts = {
     // ]
 
     /* CODE GOES HERE */
+      const cakeStock = cakes.map(cake => {
+        let cakeFlavorDetails = {}
+        cakeFlavorDetails.flavor = cake.cakeFlavor
+        cakeFlavorDetails.inStock = cake.inStock
+        
+        return cakeFlavorDetails
+      })
 
+      return cakeStock
     // Annotation:
     // Write your annotation here as a comment
   },
@@ -237,7 +245,11 @@ const cakePrompts = {
     // ]
 
     /* CODE GOES HERE */
+        const inStock = cakes.filter(cake => {
+          return cake.inStock > 0
+        })
 
+        return inStock
     // Annotation:
     // Write your annotation here as a comment
   },
@@ -247,7 +259,13 @@ const cakePrompts = {
     // 59
 
     /* CODE GOES HERE */
+      const totalStock = cakes
+      .map(cake => cake.inStock)
+      .reduce((acc, currentValue) => {
+        return acc + currentValue
+      })
 
+      return totalStock
     // Annotation:
     // Write your annotation here as a comment
   },
@@ -258,9 +276,22 @@ const cakePrompts = {
     // ['dutch process cocoa', 'toasted sugar', 'smoked sea salt', 'berries', ..etc]
 
     /* CODE GOES HERE */
+      const toppings = cakes
+      .map(cake => cake.toppings)
+      .reduce((array, innerTopping) => {
+        return [...array, ...innerTopping]
+      })
+      
+      const filteredToppings = toppings
+      .filter((currentTopping, index) => {
+        return toppings.indexOf(currentTopping) === index
+      })
 
+      return filteredToppings
     // Annotation:
     // Write your annotation here as a comment
+    //use map to get the toppings
+    //use reduce to flatten into one array
   },
 
   groceryList() {
@@ -275,9 +306,25 @@ const cakePrompts = {
     // }
 
     /* CODE GOES HERE */
+    const toppings = cakes
+    .map(cake => cake.toppings)
+    .reduce((array, innerTopping) => {
+      return [...array, ...innerTopping]
+    })
 
+    const list = {}
+
+    const determineList = toppings
+    .forEach(topping => {
+      list[topping] = (list[topping] || 0) + 1
+    })
+
+    return list
     // Annotation:
     // Write your annotation here as a comment
+    //list[topping] || 0 returns 
+    //the value of list[topping] if it is set, 
+    //otherwise 0. Then add one and set it again in the object
   }
 };
 
