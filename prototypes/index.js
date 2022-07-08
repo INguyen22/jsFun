@@ -356,7 +356,10 @@ const classPrompts = {
     // ]
 
     /* CODE GOES HERE */
+      const frontEndClasses = classrooms
+      .filter(classroom => classroom.program === "FE")
 
+      return frontEndClasses
     // Annotation:
     // Write your annotation here as a comment
   },
@@ -370,6 +373,26 @@ const classPrompts = {
     // }
 
     /* CODE GOES HERE */
+    const frontEndClassDetails = classrooms
+    .filter(classroom => classroom.program === "FE")
+    .reduce((sum, currentClass) => {
+      let totalFeCapacity = sum + currentClass.capacity
+      return totalFeCapacity
+    }, 0)
+    
+    const backEndClassDetails = classrooms
+    .filter(classroom => classroom.program === "BE")
+    .reduce((sum, currentClass) => {
+      let totalBeCapacity = sum + currentClass.capacity
+      return totalBeCapacity
+    }, 0)
+
+    const classCapacityDetails = {}
+    classCapacityDetails.feCapacity = frontEndClassDetails
+    classCapacityDetails.beCapacity = backEndClassDetails
+
+    return classCapacityDetails
+
 
     // Annotation:
     // Write your annotation here as a comment
@@ -379,7 +402,8 @@ const classPrompts = {
     // Return the array of classrooms sorted by their capacity (least capacity to greatest)
 
     /* CODE GOES HERE */
-
+      const increasingClassCapacities = classrooms.sort((a,b) => a.capacity - b.capacity)
+      return increasingClassCapacities
     // Annotation:
     // Write your annotation here as a comment
   }
