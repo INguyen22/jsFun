@@ -168,7 +168,15 @@ const modPrompts = {
     // ]
 
     /* CODE GOES HERE */
+      const results = mods.map(mod => {
+        let studentsPerInstructor = mod.students/mod.instructors
+        let newModDetails = {}
+        newModDetails.mod = mod.mod
+        newModDetails.studentsPerInstructor = studentsPerInstructor
+        return newModDetails
+      })
 
+      return results 
     // Annotation:
     // Write your annotation here as a comment
   }
