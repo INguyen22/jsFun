@@ -490,7 +490,11 @@ const weatherPrompts = {
     // [ 40, 40, 44.5, 43.5, 57, 35, 65.5, 62, 14, 46.5 ]
 
     /* CODE GOES HERE */
+    const averageWeather = weather.map(forcast => {
+      return (forcast.temperature.high + forcast.temperature.low) / 2
+    })
 
+    return averageWeather
     // Annotation:
     // Write your annotation here as a comment
   },
@@ -503,7 +507,15 @@ const weatherPrompts = {
     // 'Raleigh, North Carolina is mostly sunny.' ]
 
     /* CODE GOES HERE */
+    const sunnySpots = weather.filter(forcast => {
+      if(forcast.type === "sunny" || forcast.type === "mostly sunny")
+      return forcast
+    })
+    .map(forcast => {
+      return `${forcast.location} is ${forcast.type}.`
+    })
 
+    return sunnySpots
     // Annotation:
     // Write your annotation here as a comment
   },
@@ -518,7 +530,14 @@ const weatherPrompts = {
     // }
 
     /* CODE GOES HERE */
+    const highestHumidity = weather.reduce((highestHumidity, currentHumidity) => {
+      if(highestHumidity.humidity > currentHumidity.humidity) {
+        return highestHumidity
+      }
+      return currentHumidity
+    })
 
+    return highestHumidity
     // Annotation:
     // Write your annotation here as a comment
 
