@@ -418,7 +418,7 @@ const classPrompts = {
 // DATASET: books from './datasets/books
 
 const bookPrompts = {
-  removeViolence() {
+  removeViolence(books) {
     // Your function should access the books data through a parameter (it is being passed as an argument in the test file)
     // return an array of all book titles that are not horror or true crime. Eg:
 
@@ -430,7 +430,18 @@ const bookPrompts = {
 
 
     /* CODE GOES HERE */
+        const noViolenceBooks = books
+        .filter(book => {
+          return book.genre !== "Horror"
+        })
+        .filter(book => {
+          return book.genre !== "True Crime"
+        })
+        .map(book => {
+          return book.title
+        })
 
+        return noViolenceBooks
     // Annotation:
     // Write your annotation here as a comment
 
