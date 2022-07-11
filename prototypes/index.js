@@ -563,7 +563,27 @@ const nationalParksPrompts = {
     //}
 
     /* CODE GOES HERE */
+    const visitedParks = nationalParks.filter(nationalPark => {
+      return nationalPark.visited
+    })
+    .map(nationalPark => {
+      return nationalPark.name
+    })
 
+    const unVisitedParks = nationalParks.filter(nationalPark => {
+      return !nationalPark.visited
+    })
+    .map(nationalPark => {
+      return nationalPark.name
+    })
+
+    const parkVisitDetails = {}
+
+    parkVisitDetails.parksToVisit = unVisitedParks
+
+    parkVisitDetails.parksVisited = visitedParks
+
+    return parkVisitDetails
     // Annotation:
     // Write your annotation here as a comment
   },
@@ -579,7 +599,14 @@ const nationalParksPrompts = {
 
 
     /* CODE GOES HERE */
+    const parkStates = nationalParks.map(nationalPark => {
+      const newParkStateLocations = {};
+        
+      newParkStateLocations[nationalPark.location] =          nationalPark.name
+      return newParkStateLocations
+    })
 
+    return parkStates
     // Annotation:
     // Write your annotation here as a comment
   },
@@ -601,7 +628,18 @@ const nationalParksPrompts = {
     //   'rock climbing' ]
 
     /* CODE GOES HERE */
+    const totalActivities = nationalParks.map(nationalPark => {
+      return nationalPark.activities
+    })
+    .reduce((newArray, innerActivities) => {
+      return [...newArray,...innerActivities]  
+    },[])
+    
+    const uniqueActivities = totalActivities.filter((currentActivity, index) => {
+      return totalActivities.indexOf(currentActivity) === index
+    })
 
+    return uniqueActivities
     // Annotation:
     // Write your annotation here as a comment
   }
