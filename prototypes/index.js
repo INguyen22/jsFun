@@ -602,7 +602,7 @@ const nationalParksPrompts = {
     const parkStates = nationalParks.map(nationalPark => {
       const newParkStateLocations = {};
         
-      newParkStateLocations[nationalPark.location] =          nationalPark.name
+      newParkStateLocations[nationalPark.location] = nationalPark.name
       return newParkStateLocations
     })
 
@@ -665,7 +665,15 @@ const breweryPrompts = {
     // 40
 
     /* CODE GOES HERE */
+    const totalBeers = breweries
+    .map(brewery => {
+      return brewery.beers.length
+    })
+    .reduce((previousBeer, currentBeer) => {
+    return previousBeer + currentBeer
+  }, 0)
 
+    return totalBeers
     // Annotation:
     // Write your annotation here as a comment
   },
@@ -680,7 +688,14 @@ const breweryPrompts = {
     // ]
 
     /* CODE GOES HERE */
+    const breweryDetails = breweries.map(brewery => {
+      const breweryStockDetails = {}
+      breweryStockDetails.name = brewery.name
+      breweryStockDetails.beerCount =       brewery.beers.length
+      return breweryStockDetails
+    })
 
+    return breweryDetails
     // Annotation:
     // Write your annotation here as a comment
   },
@@ -691,7 +706,19 @@ const breweryPrompts = {
     // { name: 'Barrel Aged Nature\'s Sweater', type: 'Barley Wine', abv: 10.9, ibu: 40 }
 
     /* CODE GOES HERE */
+    const highestAbvBeer = breweries
+    .map(brewery => brewery.beers)
+    .reduce((newArray, innerBeers) => {
+      return [...newArray,...innerBeers]
+    }, [])
+    .reduce((highestAbv, currentAbv) => {
+      if (highestAbv.abv > currentAbv.abv) {
+        return highestAbv
+    }
+        return currentAbv
+    })
 
+    return highestAbvBeer
     // Annotation:
     // Write your annotation here as a comment
   }
