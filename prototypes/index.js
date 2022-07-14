@@ -721,6 +721,10 @@ const breweryPrompts = {
     return highestAbvBeer
     // Annotation:
     // Write your annotation here as a comment
+    //map to get just the beers for each brewery. 
+    //notiticed that the map array produced an array of an array of beer objects
+    //used reduce to flatten the array so that it was one whole array of objects
+    //used reduce again to find highest abv
   }
 };
 
@@ -765,7 +769,18 @@ const turingPrompts = {
     // ]
 
     /* CODE GOES HERE */
+    const totalStudentsPerInstructor = instructors.map(instructor => {
+      const instructorPerStudentDetails = {}
+      cohorts.map(cohort => {
+        if(instructor.module === cohort.module) {
+        instructorPerStudentDetails.name = instructor.name
+        instructorPerStudentDetails.studentCount = cohort.studentCount
+        }
+      })
+        return instructorPerStudentDetails
+    })
 
+      return totalStudentsPerInstructor
     // Annotation:
     // Write your annotation here as a comment
   },
