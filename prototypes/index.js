@@ -322,9 +322,28 @@ const cakePrompts = {
     return list
     // Annotation:
     // Write your annotation here as a comment
+    //each topping in the array counts as a unit
     //list[topping] || 0 returns 
     //the value of list[topping] if it is set, 
     //otherwise 0. Then add one and set it again in the object
+
+    //anotherWay:
+    // const allToppings = cakes.reduce((acc, cake) => {
+    //  acc.push(cake.toppings)
+    // return arr
+    //}, []).flat()
+
+    //return acc to tell reduce what the new value of the acc is 
+    //return AllToppings
+
+    //const toppingList = allToppings.reduce((obj, topping) => {
+    //if(obj[topping]) {
+    //obj[topping]++
+    //} else {
+    //list[topping] = 1
+    //}
+    //return obj
+    //}, {})
   }
 };
 
@@ -793,7 +812,18 @@ const turingPrompts = {
     // }
 
     /* CODE GOES HERE */
+    const studentPerInstructor = cohorts.reduce((obj, cohort) => {
+      let instructorsPerMod = 0
+      instructors.forEach(instructor => {
+        if(instructor.module === cohort.module) {
+          instructorsPerMod++
+        }
+      })
+      obj[`cohort${cohort.cohort}`] = cohort.studentCount/instructorsPerMod
+      return obj
+    }, {})
 
+    return studentPerInstructor
     // Annotation:
     // Write your annotation here as a comment
   },
@@ -814,9 +844,30 @@ const turingPrompts = {
     //   }
 
     /* CODE GOES HERE */
+    const modsPerTeacher = instructors.reduce((obj, instructor) => {
+      if(!obj[instructor.name]) {
+        obj[instructor.name] = []
+      }
+      cohorts.forEach(cohort => {
+        const doesInstructorTeachSubject = instructor.teaches.some((subjectTaught) => {
+          return cohort.curriculum.includes(subjectTaught)
+        })
+        if(doesInstructorTeachSubject) {
+           obj[instructor.name].push(cohort.module)
+        }
+      })
+     return obj 
+    }, {})
 
+    return modsPerTeacher
     // Annotation:
     // Write your annotation here as a comment
+    //go through each instructor and create keys for their names
+    //then for each cohort
+    //use some to see if the instructor.teaches passes
+    //by having at least one subject that passes
+    //return cohort.curriculum.includes(subjectTaught) = true
+    //if doesInstructorTeachSubject = true push into array
   },
 
   curriculumPerTeacher() {
