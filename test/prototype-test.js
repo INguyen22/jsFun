@@ -521,7 +521,7 @@ describe("PROTOTYPES", () => {
       })
     });
 
-    it.skip("curriculumPerTeacher", () => {
+    it("curriculumPerTeacher", () => {
       const e = turingPrompts.curriculumPerTeacher();
 
       expect(e).to.deep.equal({

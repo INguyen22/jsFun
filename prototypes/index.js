@@ -881,9 +881,35 @@ const turingPrompts = {
     // }
 
     /* CODE GOES HERE */
-
+    const result = cohorts.reduce((obj, cohort) => {
+      cohort.curriculum.forEach((curr) => {
+        obj[curr] = [];
+        instructors.forEach((instructor) => {
+          if (instructor.teaches.includes(curr)) {
+            obj[curr].push(instructor.name);
+          }
+        });
+      });
+      return obj;
+    }, {});
+    
+    return result;
     // Annotation:
     // Write your annotation here as a comment
+    //logs
+    // {
+    //   scope: [ 'Pam', 'Nathaniel', 'Will' ],
+    //   recursion: [ 'Pam', 'Leta' ],
+    //   node: [ 'Pam', 'Robbie', 'Leta', 'Louisa', 'Christie' ],
+    //   oop: [ 'Brittany', 'Nathaniel', 'Will' ],
+    //   pwas: [ 'Brittany', 'Robbie', 'Leta', 'Louisa' ],
+    //   mobile: [ 'Nathaniel' ],
+    //   javascript: [ 'Travis', 'Louisa', 'Christie', 'Will' ],
+    //   html: [ 'Travis', 'Louisa' ],
+    //   css: [ 'Travis', 'Louisa' ],
+    //   react: [ 'Christie', 'Will' ],
+    //   redux: [ 'Will' ]
+    // }
   }
 };
 
