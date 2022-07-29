@@ -942,7 +942,22 @@ const bossPrompts = {
     // ]
 
     /* CODE GOES HERE */
-
+    const bossKeys = Object.keys(bosses)
+    const newBossDetails = bossKeys.map(boss => {
+      let bossSideDetails = {}
+      let loyalty = 0
+      bosses[boss].sidekicks.forEach(bossSidekick => {
+        sidekicks.forEach(sidekick => {
+          if(sidekick.name === bossSidekick.name && sidekick.boss === bosses[boss].name) {
+            loyalty += sidekick.loyaltyToBoss
+            bossSideDetails.bossName = bosses[boss].name
+            bossSideDetails.sidekickLoyalty = loyalty
+          }
+        })
+      })
+      return bossSideDetails
+    })
+    return newBossDetails
     // Annotation:
     // Write your annotation here as a comment
   }
