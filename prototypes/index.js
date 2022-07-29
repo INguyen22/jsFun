@@ -653,6 +653,7 @@ const nationalParksPrompts = {
     .reduce((newArray, innerActivities) => {
       return [...newArray,...innerActivities]  
     },[])
+    console.log(totalActivities)
     
     const uniqueActivities = totalActivities.filter((currentActivity, index) => {
       return totalActivities.indexOf(currentActivity) === index
@@ -982,7 +983,14 @@ const astronomyPrompts = {
     // ]
 
     /* CODE GOES HERE */
-
+      const constalltionKeys = Object.keys(constellations)
+      
+      const starsArray = constalltionKeys.map(constalltionKey => {
+        return constellations[constalltionKey].stars
+      }).join()
+      
+      return stars.filter(star => starsArray.includes(star.name))
+  
     // Annotation:
     // Write your annotation here as a comment
   },
@@ -999,7 +1007,15 @@ const astronomyPrompts = {
     // }
 
     /* CODE GOES HERE */
-
+    const colorOfStarDetails = stars.reduce((obj, star) => {
+      if(!obj[star.color]) {
+        obj[star.color] = []
+      }
+      obj[star.color].push(star)
+      return obj
+    }, {})
+    
+    return colorOfStarDetails
     // Annotation:
     // Write your annotation here as a comment
   },
@@ -1021,7 +1037,13 @@ const astronomyPrompts = {
 
 
     /* CODE GOES HERE */
+    const arrangeStars = stars.sort((a, b) => a.visualMagnitude - b.visualMagnitude)
 
+    const constellationsStarsExistIn = arrangeStars.map(star => star.constellation)
+    
+    const removeBlanks = constellationsStarsExistIn.filter(star => star !== '')
+    
+    return removeBlanks
     // Annotation:
     // Write your annotation here as a comment
   }
@@ -1051,7 +1073,16 @@ const ultimaPrompts = {
     // Answer => 113
 
     /* CODE GOES HERE */
+    const allCharacterDamages = characters.map(character => character.weapons).flat()
 
+    const allWeaponDamages = allCharacterDamages.map(weapon => weapons[weapon].damage)  
+
+    const totalDamage = allWeaponDamages.reduce((sum, damage) => {
+      let total = sum + damage
+      return total
+    }, 0)
+
+    return totalDamage
     // Annotation:
     // Write your annotation here as a comment
   },
@@ -1062,7 +1093,27 @@ const ultimaPrompts = {
     // ex: [ { Avatar: { damage: 27, range: 24 }, { Iolo: {...}, ...}
 
     /* CODE GOES HERE */
-
+    const characterDetails = characters.reduce((obj, character) => {
+      character.weapons.map(weapon => {
+        if(!obj[character.name]) {
+          obj[character.name] = {}
+          obj[character.name].damage = 0
+          obj[character.name].range = 0
+        }
+        obj[character.name].damage += weapons[weapon].damage
+        obj[character.name].range += weapons[weapon].range
+      })
+      return obj
+    }, {})
+    
+    const characterDetailKeys = Object.keys(characterDetails)
+    
+    const newCharacterDetails = characterDetailKeys.map(key => {
+      let object = {}
+      object[key] = characterDetails[key]
+      return object
+    })
+    return newCharacterDetails
     // Annotation:
     // Write your annotation here as a comment
   },
